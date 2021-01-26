@@ -19,7 +19,7 @@ class SignUp extends React.Component {
   }
 
   handleSubmit = async (event) => {
-    event.preventDefaul();
+    event.preventDefault();
     const { displayName, email, password, confirmPassword } = this.state;
 
     if (password !== confirmPassword) {
@@ -28,7 +28,7 @@ class SignUp extends React.Component {
       );
       return;
     }
-    
+
     try {
       const { user } = await auth.createUserWithEmailAndPassword(
         email,
@@ -58,7 +58,7 @@ class SignUp extends React.Component {
     return (
       <div className="sign-up">
         <h2 className="title">I do not have a account</h2>
-        <span>Sign up with email and username</span>
+        <span>Sign up with email and password</span>
         <form className="sign-up-form" onSubmit={this.handleSubmit}>
           <FormInput
             type="text"
