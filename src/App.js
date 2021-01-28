@@ -9,7 +9,7 @@ import { auth, createUserProfileDocument } from "./firebase/firebase.utils";
 
 //setup redux
 import { connect } from "react-redux";
-import { setCurrentUser } from "./redux/user/user.action";
+import { setCurrentUserAction } from "./redux/user/user.action";
 
 class App extends React.Component {
   // constructor() {
@@ -22,20 +22,20 @@ class App extends React.Component {
   unsubscribeFromAuth = null;
 
   componentDidMount() {
-    const { setCurrentUser } = this.props;
+    const { setCurrentUserProps } = this.props;
 
     this.unsubscribeFromAuth = auth.onAuthStateChanged(async (userAuth) => {
       if (userAuth) {
         const userRef = await createUserProfileDocument(userAuth);
 
         userRef.onSnapshot((snapShot) => {
-          setCurrentUser({
+          setCurrentUserProps({
             id: snapShot.id,
             ...snapShot.data(),
           });
         });
       } else {
-        setCurrentUser(userAuth);
+        setCurrentUserProps(userAuth);
       }
     });
   }
@@ -59,7 +59,7 @@ class App extends React.Component {
 }
 
 const mapDispatchToProps = (dispatch) => ({
-  setCurrentUser: (user) => dispatch(setCurrentUser(user)),
+  setCurrentUserProps: (user) => dispatch(setCurrentUserAction(user)),
 });
 
 export default connect(null, mapDispatchToProps)(App);
