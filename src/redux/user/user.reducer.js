@@ -1,6 +1,7 @@
 const INITIAL_STATE = {
   currentUser: null,
 };
+
 const userReducer = (state = INITIAL_STATE, action) => {
   switch (action.type) {
     case "SET_CURRENT_USER":
@@ -8,7 +9,7 @@ const userReducer = (state = INITIAL_STATE, action) => {
         ...state,
         currentUser: action.payload,
       };
-
+    //No state update when no action registered.
     default:
       return state;
   }
