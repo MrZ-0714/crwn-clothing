@@ -3,6 +3,7 @@ import "./cart-icon.styles.scss";
 import { ReactComponent as ShoppingIcon } from "../../assets/shopping-bag.svg";
 //config redux for cart-dropdown hidden status.
 import { connect } from "react-redux";
+import { createStructuredSelector } from "reselect";
 import toggleCartHiddenAction from "../../redux/cart/cart.action";
 //Selector
 import { selectCartItemsCount } from "../../redux/cart/cart.selectors.js";
@@ -14,8 +15,8 @@ const CartIcon = ({ toogleCartHiddenProps, itemCount }) => (
   </div>
 );
 
-const mapStateToProps = (state) => ({
-  itemCount: selectCartItemsCount(state),
+const mapStateToProps = createStructuredSelector({
+  itemCount: selectCartItemsCount,
 });
 
 const mapDispatchToProps = (dispath) => ({
