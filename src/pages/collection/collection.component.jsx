@@ -22,6 +22,7 @@ const collectionPage = ({ collection }) => {
 
 const mapStateToProps = (state, ownProps) => ({
   // would also work without reselect. 
+  
   // collection: state.shop.collections[ownProps.match.params.collectionId],
   collection: selectCollection(ownProps.match.params.collectionId)(state),
 });
